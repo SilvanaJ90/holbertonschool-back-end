@@ -8,8 +8,6 @@ import sys
 
 users_url = "https://jsonplaceholder.typicode.com/users"
 todos_url = "https://jsonplaceholder.typicode.com/todos"
-   
-
 
 
 def first_line(id):
@@ -33,12 +31,12 @@ def first_line(id):
         if (i['completed'] and i['userId'] == id):
             todos_done += 1
             task.append(i['title'])
-        
 
-    print('Employee {} is done with tasks({}/{}):'.format(name, todos_done, todos_count))
+    print('Employee {} is done with tasks({}/{}):'.format(
+        name, todos_done, todos_count))
     for i in task:
         print('\t ' + i)
-   
+
 
 if __name__ == "__main__":
     first_line(int(sys.argv[1]))
