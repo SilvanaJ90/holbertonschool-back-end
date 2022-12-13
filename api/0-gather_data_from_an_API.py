@@ -28,7 +28,7 @@ def first_line(id):
             todos_done += 1
             task_completed.append(i['title'])
 
-    print('Employee {} is done with tasks({}/{}):'.format(resp_user[0]['name'], todos_done, todos_count))
+    print('Employee {} is done with tasks({}/{}):'.format(resp_user[1]['name'], todos_done, todos_count))
     for i in task_completed:
         print('\t ' + i)
    
