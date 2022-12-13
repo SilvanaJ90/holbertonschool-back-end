@@ -16,7 +16,7 @@ def first_line(id):
     """ func return inf api"""
     todos_count = 0
     todos_done = 0
-    task_completed = []
+    task = []
 
     resp = requests.get(todos_url).json()
     resp_user = requests.get(users_url).json()
@@ -32,10 +32,11 @@ def first_line(id):
         """print(todos_count)"""
         if (i['completed'] and i['userId'] == id):
             todos_done += 1
-            task_completed.append(i['title'])
+            task.append(i['title'])
+        
 
     print('Employee {} is done with tasks({}/{}):'.format(name, todos_done, todos_count))
-    for i in task_completed:
+    for i in task:
         print('\t ' + i)
    
 
