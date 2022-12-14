@@ -7,9 +7,8 @@ import json
 import requests
 import sys
 
-users_url = "https://jsonplaceholder.typicode.com/users?id="
+users_url = "https://jsonplaceholder.typicode.com/users"
 todos_url = "https://jsonplaceholder.typicode.com/todos"
-
 
 def user_info():
     """ Doc """
@@ -18,8 +17,8 @@ def user_info():
     final_json = {}
     ourdata = []
     for i in response:
-        url = users_url + str(i['userId'])
-        usr_resp = requests.get(url).json()
+        if i['userId'] == id:
+            usr_resp = requests.get(users_url + str(i['userId'])).json()
         json_entry = {'username': usr_resp[0]['username'],
                 'task': i['title'], 'completed': i['completed']}
         ourdata.append(json_entry)
