@@ -18,12 +18,12 @@ def user_info():
     final_json = {}
     ourdata = []
     for i in response:
-        if i['userId'] == id:
-            usr_resp = requests.get(users_url + str(i['userId'])).json()
-            json_entry = {'username': usr_resp[0]['username'],
-                          'task': i['title'], 'completed': i['completed']}
-            ourdata.append(json_entry)
-        final_json[str(i['userId'])] = ourdata
+        url = users_url + str(i['userId'])
+        usr_resp = requests.get(url).json()
+        json_entry = {'username': usr_resp[0]['username'],
+                        'task': i['title'], 'completed': i['completed']}
+        ourdata.append(json_entry)
+    final_json[str(i['userId'])] = ourdata
 
     with open("todo_all_employees.json", mode="w") as f:
         f.write(json.dumps(final_json))
