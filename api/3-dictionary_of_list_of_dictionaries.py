@@ -7,7 +7,7 @@ import json
 import requests
 
 
-users_url = "https://jsonplaceholder.typicode.com/users"
+users_url = "https://jsonplaceholder.typicode.com/users?id="
 todos_url = "https://jsonplaceholder.typicode.com/todos"
 
 
