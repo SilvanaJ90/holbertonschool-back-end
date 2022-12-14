@@ -17,12 +17,12 @@ def user_info(id):
     response = requests.get(todos_url).json()
     ourdata = []
     with open('{}.csv'.format(sys.argv[1]), 'w')as f:
-        writer = csv.writer(f)
+        writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC)
         for i in response:
             if i['userId'] == id:
                 url = users_url + str(i['userId'])
                 usr_resp = requests.get(url).json()
-                line ='"' + str(i['userId']) + '","' + usr_resp[0]['username'] + '","' + str(i['completed']) + '","' + i['title'] + '"'
+                line = str(i['userId']) , usr_resp[0]['username'] ,str(i['completed']) , i['title']
                 ourdata.append(line)
                 writer.writerows(ourdata)
 
