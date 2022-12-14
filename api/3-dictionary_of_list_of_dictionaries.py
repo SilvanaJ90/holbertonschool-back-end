@@ -5,9 +5,9 @@ JSON output
 
 import json
 import requests
-import sys
 
-users_url = "https://jsonplaceholder.typicode.com/users?id="
+
+users_url = "https://jsonplaceholder.typicode.com/users"
 todos_url = "https://jsonplaceholder.typicode.com/todos"
 
 
