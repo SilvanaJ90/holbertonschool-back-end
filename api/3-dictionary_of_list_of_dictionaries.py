@@ -14,16 +14,20 @@ todos_url = "https://jsonplaceholder.typicode.com/todos"
 def user_info():
     """ Doc """
 
-    response = requests.get(todos_url).json()
+    resp = requests.get(todos_url).json()
+    resp_user = requests.get(users_url).json()
+
     final_json = {}
-    ourdata = []
-    for i in response:
-        if i['userId'] == id:
-            usr_resp = requests.get(users_url + str(i['userId'])).json()
-            json_entry = {'username': usr_resp[0]['username'],
-                          'task': i['title'], 'completed': i['completed']}
-            ourdata.append(json_entry)
-        final_json[str(i['userId'])] = ourdata
+    
+    for i in resp_user:
+        ourdata = []
+        for j in resp:
+
+            json_entry = {'username': resp_user[0]['username'],
+                          'task': j['title'], 'completed': j['completed']}
+            if i['id'] == j['userId']:
+                ourdata.append(json_entry)
+        final_json[str(i['id'])] = ourdata
 
     with open("todo_all_employees.json", "w") as f:
         f.write(json.dumps(final_json))

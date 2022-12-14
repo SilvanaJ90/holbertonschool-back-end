@@ -1,20 +1,33 @@
-"2","Antonette","False","suscipit repellat esse quibusdam voluptatem incidunt"
-"2","Antonette","True","distinctio vitae autem nihil ut molestias quo"
-"2","Antonette","False","et itaque necessitatibus maxime molestiae qui quas velit"
-"2","Antonette","False","adipisci non ad dicta qui amet quaerat doloribus ea"
-"2","Antonette","True","voluptas quo tenetur perspiciatis explicabo natus"
-"2","Antonette","True","aliquam aut quasi"
-"2","Antonette","True","veritatis pariatur delectus"
-"2","Antonette","False","nesciunt totam sit blanditiis sit"
-"2","Antonette","False","laborum aut in quam"
-"2","Antonette","True","nemo perspiciatis repellat ut dolor libero commodi blanditiis omnis"
-"2","Antonette","False","repudiandae totam in est sint facere fuga"
-"2","Antonette","False","earum doloribus ea doloremque quis"
-"2","Antonette","False","sint sit aut vero"
-"2","Antonette","False","porro aut necessitatibus eaque distinctio"
-"2","Antonette","True","repellendus veritatis molestias dicta incidunt"
-"2","Antonette","True","excepturi deleniti adipisci voluptatem et neque optio illum ad"
-"2","Antonette","False","sunt cum tempora"
-"2","Antonette","False","totam quia non"
-"2","Antonette","False","doloremque quibusdam asperiores libero corrupti illum qui omnis"
-"2","Antonette","True","totam atque quo nesciunt"
+#!/usr/bin/python3
+"""
+JSON output
+"""
+
+import json
+import requests
+
+
+users_url = "https://jsonplaceholder.typicode.com/users"
+todos_url = "https://jsonplaceholder.typicode.com/todos"
+
+
+def user_info():
+    """ Doc """
+
+    response = requests.get(todos_url).json()
+    final_json = {}
+    ourdata = []
+    for i in response:
+        if i['userId'] == id:
+            usr_resp = requests.get(users_url + str(i['userId'])).json()
+            json_entry = {'username': usr_resp[0]['username'],
+                          'task': i['title'], 'completed': i['completed']}
+            ourdata.append(json_entry)
+        final_json[str(i['userId'])] = ourdata
+
+    with open("todo_all_employees.json", "w") as f:
+        f.write(json.dumps(final_json))
+
+
+if __name__ == "__main__":
+    user_info()
