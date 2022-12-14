@@ -20,10 +20,10 @@ def user_info(id):
     for i in response:
         if i['userId'] == id:
             usr_resp = requests.get(users_url + str(i['userId'])).json()
-            json_entry = {'task': i['title'], 'completed': i['completed'], 'username': usr_resp[0]['username']}
+            json_entry = {'task': i['title'], 'completed': i[
+                'completed'], 'username': usr_resp[0]['username']}
             ourdata.append(json_entry)
             final_json = {str(i['userId']): ourdata}
-
 
     with open('{}.json'.format(sys.argv[1]), 'w')as f:
         f.write(json.dumps(final_json))
@@ -31,5 +31,3 @@ def user_info(id):
 
 if __name__ == "__main__":
     user_info(int(sys.argv[1]))
-
-
