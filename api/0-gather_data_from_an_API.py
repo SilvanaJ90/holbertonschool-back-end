@@ -10,6 +10,7 @@ users_url = "https://jsonplaceholder.typicode.com/users"
 todos_url = "https://jsonplaceholder.typicode.com/todos"
 
 
+
 def first_line(id):
     """ func return inf api"""
     todos_count = 0
