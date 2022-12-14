@@ -3,7 +3,7 @@
 output of user information
 """
 
-import csv
+import json
 import requests
 import sys
 
@@ -23,9 +23,10 @@ def user_info(id):
             line = str(i['userId']), usr_resp[0]['username'], str(
                 i['completed']), i['title']
             ourdata.append(line)
+
+    student_json = json.dumps(ourdata)
     with open('{}.json'.format(sys.argv[1]), 'w')as f:
-        writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC)
-        writer.writerows(ourdata)
+        f.write(student_json)
 
 
 if __name__ == "__main__":
