@@ -18,7 +18,7 @@ def user_info():
     resp_user = requests.get(users_url).json()
 
     final_json = {}
-    
+
     for i in resp_user:
         ourdata = []
         for j in resp:
