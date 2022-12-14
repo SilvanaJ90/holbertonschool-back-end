@@ -25,7 +25,7 @@ def user_info():
         ourdata.append(json_entry)
     final_json[str(i['userId'])] = ourdata
 
-    with open("todo_all_employees.json", mode="w") as f:
+    with open("todo_all_employees.json", "w") as f:
         f.write(json.dumps(final_json))
 
 
