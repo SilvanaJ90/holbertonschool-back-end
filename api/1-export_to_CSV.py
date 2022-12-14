@@ -22,7 +22,8 @@ def user_info(id):
             if i['userId'] == id:
                 url = users_url + str(i['userId'])
                 usr_resp = requests.get(url).json()
-                line = str(i['userId']) , usr_resp[0]['username'] ,str(i['completed']) , i['title']
+                line = str(i['userId']), usr_resp[0]['username'], str(
+                    i['completed']), i['title']
                 ourdata.append(line)
                 writer.writerows(ourdata)
 
