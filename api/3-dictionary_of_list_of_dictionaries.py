@@ -1,42 +1,33 @@
 #!/usr/bin/python3
 """
-returning info from REST API
+JSON output
 """
 
+import json
 import requests
 import sys
 
-users_url = "https://jsonplaceholder.typicode.com/users"
+users_url = "https://jsonplaceholder.typicode.com/users?id="
 todos_url = "https://jsonplaceholder.typicode.com/todos"
 
 
-def first_line(id):
-    """ func return inf api"""
-    todos_count = 0
-    todos_done = 0
-    task = []
+def user_info(id):
+    """ Doc """
 
-    resp = requests.get(todos_url).json()
-    resp_user = requests.get(users_url).json()
+    response = requests.get(todos_url).json()
 
-    name = None
-    for i in resp_user:
-        if i['id'] == id:
-            name = i['name']
-
-    for i in resp:
+    ourdata = []
+    for i in response:
         if i['userId'] == id:
-            todos_count += 1
-        """print(todos_count)"""
-        if (i['completed'] and i['userId'] == id):
-            todos_done += 1
-            task.append(i['title'])
+            usr_resp = requests.get(users_url + str(i['userId'])).json()
+            json_entry = {'task': i['title'], 'completed': i[
+                'completed'], 'username': usr_resp[0]['username']}
+            ourdata.append(json_entry)
+            final_json = {str(i['userId']): ourdata}
 
-    print('Employee {} is done with tasks({}/{}):'.format(
-        name, todos_done, todos_count))
-    for i in task:
-        print('\t ' + i)
+    with open('{}.json'.format(sys.argv[1]), 'w')as f:
+        f.write(json.dumps(final_json))
 
 
 if __name__ == "__main__":
-    first_line(int(sys.argv[1]))
+    user_info(int(sys.argv[1]))
