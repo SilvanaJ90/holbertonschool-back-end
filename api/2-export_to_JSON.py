@@ -15,11 +15,13 @@ def user_info(id):
     """ Doc """
 
     response = requests.get(todos_url).json()
+    json_entry  = {}
     ourdata = []
     for i in response:
         if i['userId'] == id:
             usr_resp = requests.get(users_url + str(i['userId'])).json()
-            json_entry = {'username': usr_resp[0]['username'], 'completed': i['completed'], 'task': i['title']}
+            json_entry = str(i['userId']), {'task': i['title'], 'completed': i['completed'], 'username': usr_resp[0]['username']}
+
             ourdata.append(json_entry)
 
     student_json = json.dumps(ourdata)
