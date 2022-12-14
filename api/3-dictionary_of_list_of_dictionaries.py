@@ -27,7 +27,7 @@ def user_info():
                           'task': j['title'], 'completed': j['completed']}
             if i['id'] == j['userId']:
                 ourdata.append(json_entry)
-        final_json[str(i['id'])] = ourdata
+        final_json[i['id']] = ourdata
 
     with open("todo_all_employees.json", "w") as f:
         f.write(json.dumps(final_json))
