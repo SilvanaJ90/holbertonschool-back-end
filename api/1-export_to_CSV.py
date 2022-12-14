@@ -1,42 +1,31 @@
 #!/usr/bin/python3
 """
-returning info from REST API
+output of user information
 """
 
+import csv
 import requests
 import sys
 
-users_url = "https://jsonplaceholder.typicode.com/users"
+users_url = "https://jsonplaceholder.typicode.com/users?id="
 todos_url = "https://jsonplaceholder.typicode.com/todos"
 
 
-def first_line(id):
-    """ func return inf api"""
-    todos_count = 0
-    todos_done = 0
-    task = []
+def user_info(id):
+    """ Doc """
 
-    resp = requests.get(todos_url).json()
-    resp_user = requests.get(users_url).json()
-
-    name = None
-    for i in resp_user:
-        if i['id'] == id:
-            name = i['name']
-
-    for i in resp:
-        if i['userId'] == id:
-            todos_count += 1
-        """print(todos_count)"""
-        if (i['completed'] and i['userId'] == id):
-            todos_done += 1
-            task.append(i['title'])
-
-    print('Employee {} is done with tasks({}/{}):'.format(
-        name, todos_done, todos_count))
-    for i in task:
-        print('\t ' + i)
+    response = requests.get(todos_url).json()
+    ourdata = []
+    with open('{}.csv'.format(sys.argv[1]), 'w')as f:
+        writer = csv.writer(f)
+        for i in response:
+            if i['userId'] == id:
+                url = users_url + str(i['userId'])
+                usr_resp = requests.get(url).json()
+                line = str(i['userId']) , usr_resp[0]['username'] ,str(i['completed']) , i['title']
+                ourdata.append(line)
+                writer.writerows(ourdata)
 
 
 if __name__ == "__main__":
-    first_line(int(sys.argv[1]))
+    user_info(int(sys.argv[1]))
