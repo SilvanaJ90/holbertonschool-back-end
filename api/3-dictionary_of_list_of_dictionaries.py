@@ -27,7 +27,7 @@ def user_info():
                 resp_user = requests.get(url).json()
 
                 json_entry = {'username': i['username'],
-                          'task': j['title'], 'completed': j['completed']}
+                              'task': j['title'], 'completed': j['completed']}
                 ourdata.append(json_entry)
         final_json[i['id']] = ourdata
 
