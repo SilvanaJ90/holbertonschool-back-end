@@ -22,10 +22,9 @@ def user_info():
     for i in resp_user:
         ourdata = []
         for j in resp:
-
-            json_entry = {'username': resp_user[0]['username'],
-                          'task': j['title'], 'completed': j['completed']}
-            if i['id'] == j['userId']:
+            if j.get('userId') == i.get('id'):
+                json_entry = {'username': resp_user[0]['username'],
+                              'task': j['title'], 'completed': j['completed']}
                 ourdata.append(json_entry)
         final_json[i['id']] = ourdata
 
